@@ -1,48 +1,32 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
-var prefix = "W";
-console.log(`Welcome Bro ${client.user.tag}!`)
-var prefix = '-'
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+
+const developers = ["507612709953470471"]
+const adminprefix = "!";
 client.on('message', message => {
-  if (!message.content.startsWith(prefix)) return;
-  var args = message.content.split(' ').slice(1);
-  var argresult = args.join(' ');
-  if (message.author.id !== "507612709953470471") return;
-
-  
-  if (message.content.startsWith(prefix + 'setwatch')) {
-  client.user.setActivity(argresult, {type: 'WATCHING'})
-     console.log('test' + argresult);
-    message.channel.sendMessage(`Watch Now: **${argresult}`)
-} 
-
- 
-  if (message.content.startsWith(prefix + 'setlis')) {
-  client.user.setActivity(argresult, {type: 'LISTENING'})
-     console.log('test' + argresult);
-    message.channel.sendMessage(`LISTENING Now: **${argresult}`)
-} 
-
-
-if (message.content.startsWith(prefix + 'setname')) {
-  client.user.setUsername(argresult).then
-      message.channel.sendMessage(`Username Changed To **${argresult}**`)
-  return message.reply("You Can change the username 2 times per hour");
-} 
-
-if (message.content.startsWith(prefix + 'setavatar')) {
-  client.user.setAvatar(argresult);
-   message.channel.sendMessage(`Avatar Changed Successfully To **${argresult}**`);
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!developers.includes(message.author.id)) return;
+      
+  if (message.content.startsWith(adminprefix + 'sp')) {
+    client.user.setGame(argresult);
+      message.channel.send(`**Status You   ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'sw')) {
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send(`**Status You   ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'sl')) {
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send(`**Status You  ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'st')) {
+    client.user.setGame(argresult, "https://www.twitch.tv/M3roof");
+      message.channel.send(`**Status You ${argresult} **`)
 }
+});
 
-if (message.content.startsWith(prefix + 'setT')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/peery13");
-     console.log('test' + argresult);
-    message.channel.sendMessage(`Streaming: **${argresult}`)
-} 
-if (message.content.startsWith(prefix + 'setgame')) {
-  client.user.setGame(argresult);
-     console.log('test' + argresult);
-    message.channel.sendMessage(`Playing: **${argresult}`)
-} 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
