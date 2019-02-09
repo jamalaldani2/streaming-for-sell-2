@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 var prefix = "W";
-console.log(`Welcome Bro ${client.user.tag}!`); 
+console.log(`Welcome Bro ${client.user.tag}!`)
 var prefix = '-'
 client.on('message', message => {
   if (!message.content.startsWith(prefix)) return;
